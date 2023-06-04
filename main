@@ -1,0 +1,20 @@
+import os
+import comtypes.client
+
+def ppt_to_pdf(input_ppt, output_pdf):
+    powerpoint = comtypes.client.CreateObject("Powerpoint.Application")
+    powerpoint.Visible = 1
+
+    presentation = powerpoint.Presentations.Open(input_ppt)
+    presentation.ExportAsFixedFormat(output_pdf, 2)  # 2 represents the PDF format
+
+    presentation.Close()
+    powerpoint.Quit()
+
+    print("Conversion complete. PDF file saved as", output_pdf)
+
+# Example usage
+input_ppt = "input.pptx"
+output_pdf = "output.pdf"
+
+ppt_to_pdf(input_ppt, output_pdf)
